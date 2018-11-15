@@ -19,23 +19,23 @@ window.findNRooksSolution = function(num) {
   var solution = undefined; //fixme
   var board = new Board({n: num});
   var rookSolution = function(chestBoard, row, col) {
-    if (chestBoard.hasRowConflictAt(row) || chestBoard.hasColConflictAt(col)) {
+    if (chestBoard.hasAnyRooksConflicts()) {
       return;
     }
     if (chestBoard.rows()[chestBoard.rows().length - 1].includes(1)) {
-      if (!chestBoard.hasRowConflictAt(row) && !chestBoard.hasColConflictAt(col)) {
+      if (!chestBoard.hasAnyRooksConflicts()) {
         solution = chestBoard.rows().slice();
       }
       return;
     }
-    if (chestBoard.rows()[row][col] === 1) {
-      col++;
-    }
     for (var r = row; r < chestBoard.rows().length; r++) {
       for (var c = col; c < chestBoard.rows()[r].length; c++) {
+        if (chestBoard.rows()[r][c] === 1 ) {
+          continue;
+        }
         chestBoard.togglePiece(r, c);
         rookSolution(chestBoard, r, c);
-        if (chestBoard.hasRowConflictAt(row) || chestBoard.hasColConflictAt(col)) {
+        if (chestBoard.hasAnyRooksConflicts()) {
           chestBoard.togglePiece(r, c);
         }         
       }  
