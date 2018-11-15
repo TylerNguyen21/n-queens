@@ -80,7 +80,7 @@
     // test if a specific row on this board contains a conflict
     hasRowConflictAt: function(rowIndex) {
       var result = this.get(rowIndex);
-      result = result.reduce((acc, val) => acc + val)
+      result = result.reduce((acc, val) => acc + val);
       if (result > 1) {
         return true;
       }
@@ -108,11 +108,11 @@
       var check = this.rows();
       var count = 0;
       for (var r = 0; r < check.length; r++) {
-        if (check[r][colIndex] === 1){
+        if (check[r][colIndex] === 1) {
           count ++;
         }  
       }
-      if(count > 1) {
+      if (count > 1) {
         return true;
       }
       return false;
